@@ -64,12 +64,12 @@ function getDrink() {
         }
 
         function nextSlide() {
-            currentIndex = (currentIndex + 2) % carousel.childElementCount;
+            currentIndex = (currentIndex + 1) % carousel.childElementCount;
             updateCarousel();
         }
     
         function prevSlide() {
-            currentIndex = (currentIndex - 2 + carousel.childElementCount) % carousel.childElementCount;
+            currentIndex = (currentIndex - 1 + carousel.childElementCount) % carousel.childElementCount;
             updateCarousel();
         }
 
@@ -99,4 +99,8 @@ function adjustCarouselItemHeight() {
 }
 
 //toDoList
-// I have successfully made a (mostly) working carousel.  However now the CSS is fucked.  You can't see the entire DIV's content.  It's pushed upwards.
+// I have managed to make the CSS work.  I changed the .carousel-container height from 100vh (viewport height, apparently) to 100%.
+// The carousel still goes off-center if I have a list of drinks with an odd number of drinks.
+// My carousel only goes through half of the items in the array... why?
+    //it has to do with the relationship between the nextSlide function and the transformation of the elements.  If an API response has 24 items in the array, the Index is reset to 0 after I click 24 times.
+// i have to press next or previous twice every time I want the next item to be centered.... why?
