@@ -26,7 +26,7 @@ function getDrink() {
             let drinkInstructions = document.createElement("p")
                 drinkInstructions.innerHTML = el.strInstructions
 
-            //this API stores the ingredients in up to 15 different strings, ugh, so we put all those into one array for ease.
+            //this API stores the ingredients in up to 15 different strings & the measurements in another 15, ugh, so we put all those into one array for ease.
             let ingredients = []
                 for (let i = 1; i <= 15; i++) {
                   ingredients.push( (el[`strMeasure`+i] || "") + el[`strIngredient`+i] )  //the property names are strIngredient1 through strIngredient15, so the template literal + i allows us to go through them all. 
@@ -59,12 +59,14 @@ function getDrink() {
         function updateCarousel() {
             const items = document.querySelectorAll(".carousel-item");
             items.forEach((item, index) => {
-                item.style.transform = `translateX(${100 * (index - currentIndex)}%)`;
+                item.style.transform = `translateX(${-100 * currentIndex}%)`;  //Why does it have to be negative?  Positive numbers screw it up
+                // item.style.transform = `translateX(${100 * (index-currentIndex)}%)`;  I kept this because I want to understand why it didn't work.
             })
         }
 
         function nextSlide() {
-            currentIndex = (currentIndex + 1) % carousel.childElementCount;
+            currentIndex = (currentIndex + 1) % carousel.childElementCount;  //The modulus operator is to ensure the carousel returns to the 0 index element when it reaches the end.
+            console.log(currentIndex)
             updateCarousel();
         }
     
@@ -76,31 +78,22 @@ function getDrink() {
         nextButton.addEventListener("click", nextSlide);
         prevButton.addEventListener("click", prevSlide);
         updateCarousel()
-        adjustCarouselItemHeight()
     })
     .catch(err => {
         console.log(`${err}`)
     });
 }
 
-function adjustCarouselItemHeight() {
-    const items = document.querySelectorAll(".carousel-item");
-    items.forEach(item => {
-        const children = item.children;
-        let totalHeight = 0;
-
-        //loop through the children to calculate their heights
-        for (let i = 0; i < children.length; i++) {
-            totalHeight += children[i].clientHeight;
-        }
-
-        item.style.minHeight = totalHeight + 'px'
-    })
-}
-
 //toDoList
-// I have managed to make the CSS work.  I changed the .carousel-container height from 100vh (viewport height, apparently) to 100%.
-// The carousel still goes off-center if I have a list of drinks with an odd number of drinks.
+//add some viewport detection to make it work on mobile
+
+//move the next and prev buttons
+
+//Most of the images from this API are 700x700, but when one of them isn't, it throws off the carousel
+  //"fixed" by setting a min-width property on the carousel items.
+
 // My carousel only goes through half of the items in the array... why?
-    //it has to do with the relationship between the nextSlide function and the transformation of the elements.  If an API response has 24 items in the array, the Index is reset to 0 after I click 24 times.
+    //fixed - it has to do with the relationship between the nextSlide function and the transformation of the elements.  If an API response has 24 items in the array, the Index is reset to 0 after I click 24 times.
+
 // i have to press next or previous twice every time I want the next item to be centered.... why?
+  //I fixed it, but never got the answer to this question.
