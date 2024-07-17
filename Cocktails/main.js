@@ -96,4 +96,4 @@ function getDrink() {
     //fixed - it has to do with the relationship between the nextSlide function and the transformation of the elements.  If an API response has 24 items in the array, the Index is reset to 0 after I click 24 times.
 
 // i have to press next or previous twice every time I want the next item to be centered.... why?
-  //I fixed it, but never got the answer to this question.
+  //I fixed it (by changing the translateX), but never got the answer to this question.

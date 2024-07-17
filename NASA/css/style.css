@@ -1,0 +1,38 @@
+/******************************************
+/* CSS
+/*******************************************/
+
+/* Box Model Hack */
+*{
+  box-sizing: border-box;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+img{
+  display: block;
+  margin: 0 auto;
+}
+
+#video-container {
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0, auto;
+    padding: 0;
+}
+
+#nasa-video {
+    width: 100%;
+    height: 100%;
+    margin: 0, auto;
+    border: none;
+}
+
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
